@@ -1,0 +1,12 @@
+[package]
+name = "force-send-sync"
+version = "1.0.0"
+authors = ["Markus Klein <markus-klein@live.de>"]
+edition = "2018"
+license = "MIT"
+repository = "https://github.com/pacman82/force-send-sync"
+documentation = "https://docs.rs/force-send-sync/"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
