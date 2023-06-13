@@ -5,6 +5,7 @@
 use std::ops::{Deref, DerefMut};
 
 /// Wraps a type to make it implement `Send`.
+#[repr(transparent)]
 pub struct Send<T>(T);
 
 impl<T> Send<T> {
@@ -41,6 +42,7 @@ impl<T> DerefMut for Send<T> {
 }
 
 /// Wraps a type to make it implement `Sync`.
+#[repr(transparent)]
 pub struct Sync<T>(T);
 
 impl<T> Sync<T> {
@@ -77,6 +79,7 @@ impl<T> DerefMut for Sync<T> {
 }
 
 /// Wraps a type to make it implement `Send` and `Sync`.
+#[repr(transparent)]
 pub struct SendSync<T>(T);
 
 impl<T> SendSync<T> {
