@@ -2,14 +2,14 @@
 //! circumstances use this to silence some compiler error you do not understand. Only use this if
 //! you do understand why your type is `Send` and or `Sync`, and also understand why the compiler
 //! disagrees with you.
-use std::ops::{Deref, DerefMut};
+#![no_std]
+use core::ops::{Deref, DerefMut};
 
 /// Wraps a type to make it implement `Send`.
 #[repr(transparent)]
 pub struct Send<T>(T);
 
 impl<T> Send<T> {
-
     /// # Safety
     ///
     /// This is not a magic way to make `t` `Send`. It is a way to tell the compiler `t` is `Send`
@@ -24,7 +24,7 @@ impl<T> Send<T> {
     }
 }
 
-unsafe impl<T> std::marker::Send for Send<T> {}
+unsafe impl<T> core::marker::Send for Send<T> {}
 
 impl<T> Deref for Send<T> {
     type Target = T;
@@ -35,7 +35,6 @@ impl<T> Deref for Send<T> {
 }
 
 impl<T> DerefMut for Send<T> {
-
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.0
     }
@@ -46,7 +45,6 @@ impl<T> DerefMut for Send<T> {
 pub struct Sync<T>(T);
 
 impl<T> Sync<T> {
-
     /// # Safety
     ///
     /// This is not a magic way to make `t` `Sync`. It is a way to tell the compiler `t` is `Sync`
@@ -61,7 +59,7 @@ impl<T> Sync<T> {
     }
 }
 
-unsafe impl<T> std::marker::Sync for Sync<T> {}
+unsafe impl<T> core::marker::Sync for Sync<T> {}
 
 impl<T> Deref for Sync<T> {
     type Target = T;
@@ -72,7 +70,6 @@ impl<T> Deref for Sync<T> {
 }
 
 impl<T> DerefMut for Sync<T> {
-
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.0
     }
@@ -83,7 +80,6 @@ impl<T> DerefMut for Sync<T> {
 pub struct SendSync<T>(T);
 
 impl<T> SendSync<T> {
-
     /// # Safety
     ///
     /// This is not a magic way to make `t` `Send` and `Sync`. It is a way to tell the compiler `t`
@@ -98,8 +94,8 @@ impl<T> SendSync<T> {
     }
 }
 
-unsafe impl<T> std::marker::Send for SendSync<T> {}
-unsafe impl<T> std::marker::Sync for SendSync<T> {}
+unsafe impl<T> core::marker::Send for SendSync<T> {}
+unsafe impl<T> core::marker::Sync for SendSync<T> {}
 
 impl<T> Deref for SendSync<T> {
     type Target = T;
@@ -110,7 +106,6 @@ impl<T> Deref for SendSync<T> {
 }
 
 impl<T> DerefMut for SendSync<T> {
-
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.0
     }
