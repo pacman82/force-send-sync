@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.0
+
+* Update to edition 2024
+
 ## 1.2.0
 
 * Support for `no-std`
